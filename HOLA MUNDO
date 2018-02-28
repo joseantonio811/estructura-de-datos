@@ -1,0 +1,11 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using name space std;
+int main()
+{
+cout<<"hola mundo" \n";
+cout<<Soy Jose Antonio Lopez";
+getch();
+return 0;
+}

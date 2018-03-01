@@ -1,0 +1,24 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+using namespace std;
+void main (void) {
+	int n,i = 0,d,t;
+	string r = "";
+	cout <<"INTRODUZCA EL NUMERO"; cin>>n;
+	t=n;
+	while (t>0) {
+		d = t % 10;
+		t = t / 10;
+		i = i * 10 + d;
+	}
+	if (n==i)
+		r = " ES CAPICUA";
+	else
+		r = " NO ES CAPICUA";
+
+	cout<<"\n";
+	cout<<"Resultados: "<<r<<"\n";
+	getch();
+}

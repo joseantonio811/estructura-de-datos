@@ -1,0 +1,151 @@
+pila.h
+
+#pragma once 
+class pila
+{
+private:
+	int tope;
+	int v[5];
+public:
+	pila(void);
+	~pila(void);
+	void insertar (int dato);
+	int eliminar ();
+	bool vacio ();
+	bool lleno ();
+	int mayor ();
+	void mostrar ();
+	int buscar (int dato);
+};
+
+pila.cpp
+
+#include "stdafx.h"
+#include "pila.h"
+#include <iostream>
+#define max 20
+using namespace std;
+
+pila::pila(void)
+{
+	tope=-1;
+}
+pila::~pila(void)
+{
+}
+void pila::insertar (int dato){
+	if (lleno()==false){
+		tope++;
+		v[tope]=dato;
+	}else{
+		cout<<"la pila se encuentra llena"<<endl;
+	}
+}
+int pila::eliminar (){
+	int dato;
+	if(vacio()==false){
+		dato=v[tope];
+		tope--;
+	}else{
+		cout<<"la pila se encuentra llena"<<endl;
+	}
+	return (dato);
+}
+bool pila::vacio (){
+	return (tope<=-1);
+}
+bool pila::lleno (){
+	return (tope>=max-1);
+}
+int pila::mayor (){
+	int dato,i;
+	if (vacio()==false){
+		dato=v[tope];
+		for (i=tope-1; i>=0; i--){
+			if(dato<v[i]){
+				dato=v[i];
+			}
+		}
+	}
+	return (dato);
+}
+void pila::mostrar(){
+	int i;
+	for(i=tope; i>=0; i--){
+		cout<<v[i]<<"  ["<<i<<"]"<<endl;
+	}
+}
+int pila::buscar (int dato){
+	int i,p;
+	if(vacio()==false){
+		i=0;
+		while (i<=tope){
+			if(dato==v[i]){
+				p=i;
+			}
+			i++;
+		}
+	}
+	return (p);
+}
+
+
+pilaestatica.cpp
+
+#include "stdafx.h"
+#include <iostream>
+#include "stdio.h"
+#include "pila.h"
+#include <conio.h>
+
+using namespace std;
+
+void main (){
+	int op;
+	int n;
+	pila pilas;
+
+	do{
+		do{
+			cout<<endl<<endl;
+			cout<<"MENU"<<endl;
+			cout<<"1. Cargar pila"<<endl;
+			cout<<"2. Sacar un elemento de pila"<<endl;
+			cout<<"3. Mostrar pila"<<endl;
+			cout<<"4. Mayor numero"<<endl;
+			cout<<"5. buscar numero"<<endl;
+			cout<<"0. Salir"<<endl;
+			cout<<endl;
+			cout<<"Introduzca una opcion"<<endl;
+			cin>>op;
+		}while (!(op>=0 && op<=5));
+		switch (op){
+		case 1:
+			cout<<"ingrese un numero"<<endl;
+			cin>>n;
+			pilas.insertar(n);
+			break;
+		case 2:
+
+			if(pilas.vacio()==false){
+			cout<<"el elemento recuperado es: "<<pilas.eliminar()<<endl;
+			}else{
+				cout<<"PILA VACIA"<<endl;
+			}
+			break;
+		case 3:
+			pilas.mostrar();
+			break;
+		case 4:
+			cout<<"el mayor numero es: "<<pilas.mayor();
+			break;
+		case 5:
+			cout<<"ingrese el numero a buscar"<<endl;
+			cin>>n;
+			cout<<"el numero se encuentra en la posicion: "<<pilas.buscar(n);
+			break;
+		}
+	}while(op!=0);
+	
+	getch();
+}
